@@ -1,0 +1,1 @@
+add_executable(component3_combine src/main.cpp)
