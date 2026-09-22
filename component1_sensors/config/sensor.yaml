@@ -1,0 +1,8 @@
+
+sensors:
+  - id: sensor_1
+    type: A
+  - id: sensor_2
+    type: B
+  - id: sensor_3
+    type: A

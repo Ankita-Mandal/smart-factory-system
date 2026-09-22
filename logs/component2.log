@@ -1,0 +1,105 @@
+2026-09-21 20:39:48.287 [info] [component2] Component 2 started
+2026-09-21 20:39:48.288 [debug] [component2] Stored PLC record sequence=55
+2026-09-21 20:39:48.288 [info] [component2] Connected to component3 at /tmp/component2_socket
+2026-09-21 20:39:48.289 [debug] [component2] Sent PLC record sequence=54 values=5
+2026-09-21 20:39:48.289 [debug] [component2] Sent PLC record sequence=55 values=5
+2026-09-21 20:39:49.293 [debug] [component2] Stored PLC record sequence=56
+2026-09-21 20:39:49.293 [debug] [component2] Sent PLC record sequence=56 values=5
+2026-09-21 20:39:50.294 [debug] [component2] Stored PLC record sequence=57
+2026-09-21 20:39:50.295 [debug] [component2] Sent PLC record sequence=57 values=5
+2026-09-21 20:39:51.300 [debug] [component2] Stored PLC record sequence=58
+2026-09-21 20:39:51.301 [debug] [component2] Sent PLC record sequence=58 values=5
+2026-09-21 20:39:52.307 [debug] [component2] Stored PLC record sequence=59
+2026-09-21 20:39:52.307 [debug] [component2] Sent PLC record sequence=59 values=5
+2026-09-21 20:39:53.308 [debug] [component2] Stored PLC record sequence=60
+2026-09-21 20:39:53.310 [debug] [component2] Sent PLC record sequence=60 values=5
+2026-09-21 20:39:54.312 [debug] [component2] Stored PLC record sequence=61
+2026-09-21 20:39:54.313 [debug] [component2] Sent PLC record sequence=61 values=5
+2026-09-21 20:39:55.318 [debug] [component2] Stored PLC record sequence=62
+2026-09-21 20:39:55.318 [debug] [component2] Sent PLC record sequence=62 values=5
+2026-09-21 20:39:56.319 [debug] [component2] Stored PLC record sequence=63
+2026-09-21 20:39:56.320 [error] [component2] write() failed: Broken pipe
+2026-09-21 20:39:56.320 [warning] [component2] Failed to send PLC record sequence=63
+2026-09-21 20:39:56.320 [info] [component2] Disconnected from component3
+2026-09-21 20:39:57.325 [debug] [component2] Stored PLC record sequence=64
+2026-09-21 20:39:57.325 [debug] [component2] Could not connect to component3: Connection refused
+2026-09-21 20:39:57.326 [info] [component2] Disconnected from component3
+2026-09-21 20:39:57.326 [warning] [component2] Component3 unavailable; records remain queued
+2026-09-21 20:39:58.331 [debug] [component2] Stored PLC record sequence=65
+2026-09-21 20:39:58.331 [debug] [component2] Could not connect to component3: Connection refused
+2026-09-21 20:39:58.331 [info] [component2] Disconnected from component3
+2026-09-21 20:39:58.331 [warning] [component2] Component3 unavailable; records remain queued
+2026-09-21 20:39:59.336 [debug] [component2] Stored PLC record sequence=66
+2026-09-21 20:39:59.337 [debug] [component2] Could not connect to component3: Connection refused
+2026-09-21 20:39:59.337 [info] [component2] Disconnected from component3
+2026-09-21 20:39:59.337 [warning] [component2] Component3 unavailable; records remain queued
+2026-09-21 20:40:00.342 [debug] [component2] Stored PLC record sequence=67
+2026-09-21 20:40:00.342 [debug] [component2] Could not connect to component3: Connection refused
+2026-09-21 20:40:00.342 [info] [component2] Disconnected from component3
+2026-09-21 20:40:00.342 [warning] [component2] Component3 unavailable; records remain queued
+2026-09-21 20:40:01.348 [debug] [component2] Stored PLC record sequence=68
+2026-09-21 20:40:01.348 [debug] [component2] Could not connect to component3: Connection refused
+2026-09-21 20:40:01.348 [info] [component2] Disconnected from component3
+2026-09-21 20:40:01.348 [warning] [component2] Component3 unavailable; records remain queued
+2026-09-21 20:40:02.350 [debug] [component2] Stored PLC record sequence=69
+2026-09-21 20:40:02.350 [debug] [component2] Could not connect to component3: Connection refused
+2026-09-21 20:40:02.350 [info] [component2] Disconnected from component3
+2026-09-21 20:40:02.350 [warning] [component2] Component3 unavailable; records remain queued
+2026-09-21 20:40:03.356 [debug] [component2] Stored PLC record sequence=70
+2026-09-21 20:40:03.356 [info] [component2] Connected to component3 at /tmp/component2_socket
+2026-09-21 20:40:03.356 [debug] [component2] Sent PLC record sequence=63 values=5
+2026-09-21 20:40:03.356 [debug] [component2] Sent PLC record sequence=64 values=5
+2026-09-21 20:40:03.356 [debug] [component2] Sent PLC record sequence=65 values=5
+2026-09-21 20:40:03.356 [debug] [component2] Sent PLC record sequence=66 values=5
+2026-09-21 20:40:03.356 [debug] [component2] Sent PLC record sequence=67 values=5
+2026-09-21 20:40:03.356 [debug] [component2] Sent PLC record sequence=68 values=5
+2026-09-21 20:40:03.356 [debug] [component2] Sent PLC record sequence=69 values=5
+2026-09-21 20:40:03.357 [debug] [component2] Sent PLC record sequence=70 values=5
+2026-09-21 20:40:04.362 [debug] [component2] Stored PLC record sequence=71
+2026-09-21 20:40:04.362 [debug] [component2] Sent PLC record sequence=71 values=5
+2026-09-21 20:40:05.368 [debug] [component2] Stored PLC record sequence=72
+2026-09-21 20:40:05.368 [debug] [component2] Sent PLC record sequence=72 values=5
+2026-09-21 20:40:06.372 [debug] [component2] Stored PLC record sequence=73
+2026-09-21 20:40:06.373 [debug] [component2] Sent PLC record sequence=73 values=5
+2026-09-21 20:40:07.378 [debug] [component2] Stored PLC record sequence=74
+2026-09-21 20:40:07.378 [debug] [component2] Sent PLC record sequence=74 values=5
+2026-09-21 20:40:08.383 [debug] [component2] Stored PLC record sequence=75
+2026-09-21 20:40:08.383 [debug] [component2] Sent PLC record sequence=75 values=5
+2026-09-21 20:40:09.389 [debug] [component2] Stored PLC record sequence=76
+2026-09-21 20:40:09.389 [debug] [component2] Sent PLC record sequence=76 values=5
+2026-09-21 20:40:10.395 [debug] [component2] Stored PLC record sequence=77
+2026-09-21 20:40:10.396 [debug] [component2] Sent PLC record sequence=77 values=5
+2026-09-21 20:40:11.398 [debug] [component2] Stored PLC record sequence=78
+2026-09-21 20:40:11.399 [debug] [component2] Sent PLC record sequence=78 values=5
+2026-09-21 20:40:12.403 [debug] [component2] Stored PLC record sequence=79
+2026-09-21 20:40:12.404 [debug] [component2] Sent PLC record sequence=79 values=5
+2026-09-21 20:40:13.407 [debug] [component2] Stored PLC record sequence=80
+2026-09-21 20:40:13.407 [debug] [component2] Sent PLC record sequence=80 values=5
+2026-09-21 20:40:14.409 [debug] [component2] Stored PLC record sequence=81
+2026-09-21 20:40:14.410 [debug] [component2] Sent PLC record sequence=81 values=5
+2026-09-21 20:40:15.416 [debug] [component2] Stored PLC record sequence=82
+2026-09-21 20:40:15.416 [debug] [component2] Sent PLC record sequence=82 values=5
+2026-09-21 20:40:16.422 [debug] [component2] Stored PLC record sequence=83
+2026-09-21 20:40:16.422 [debug] [component2] Sent PLC record sequence=83 values=5
+2026-09-21 20:40:17.426 [debug] [component2] Stored PLC record sequence=84
+2026-09-21 20:40:17.427 [debug] [component2] Sent PLC record sequence=84 values=5
+2026-09-21 20:40:18.430 [debug] [component2] Stored PLC record sequence=85
+2026-09-21 20:40:18.430 [error] [component2] write() failed: Broken pipe
+2026-09-21 20:40:18.430 [warning] [component2] Failed to send PLC record sequence=85
+2026-09-21 20:40:18.430 [info] [component2] Disconnected from component3
+2026-09-21 20:40:19.436 [debug] [component2] Stored PLC record sequence=86
+2026-09-21 20:40:19.436 [debug] [component2] Could not connect to component3: Connection refused
+2026-09-21 20:40:19.436 [info] [component2] Disconnected from component3
+2026-09-21 20:40:19.436 [warning] [component2] Component3 unavailable; records remain queued
+2026-09-21 20:40:20.441 [debug] [component2] Stored PLC record sequence=87
+2026-09-21 20:40:20.441 [debug] [component2] Could not connect to component3: Connection refused
+2026-09-21 20:40:20.441 [info] [component2] Disconnected from component3
+2026-09-21 20:40:20.441 [warning] [component2] Component3 unavailable; records remain queued
+2026-09-21 20:40:21.447 [debug] [component2] Stored PLC record sequence=88
+2026-09-21 20:40:21.447 [debug] [component2] Could not connect to component3: Connection refused
+2026-09-21 20:40:21.447 [info] [component2] Disconnected from component3
+2026-09-21 20:40:21.447 [warning] [component2] Component3 unavailable; records remain queued
+2026-09-21 20:40:22.452 [debug] [component2] Stored PLC record sequence=89
+2026-09-21 20:40:22.452 [debug] [component2] Could not connect to component3: Connection refused
+2026-09-21 20:40:22.452 [info] [component2] Disconnected from component3
+2026-09-21 20:40:22.452 [warning] [component2] Component3 unavailable; records remain queued

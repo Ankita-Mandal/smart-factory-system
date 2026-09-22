@@ -1,76 +1,51 @@
-// main function to read from both types of sensors once per second. Each reading produces a record consisting of a timestamp and an vector of double data values. The records are stored in a vector and sent to component 3 for further processing.
-//get data size and range from yaml config
-
+#include "common/logger.h"
 #include "plc_driver.h"
-#include "common/data_generator.h"
-// #include <yaml-cpp/yaml.h>
-#include <iostream>
-#include <string>
-#include <cstring>
-#include <cstdio>
-#include <unistd.h>
+#include "plc_outbox.h"
+#include "plc_sender.h"
+
 #include <chrono>
+#include <memory>
 #include <thread>
-#include <sys/socket.h>
-#include <sys/un.h>
+#include <csignal>
 
-namespace {
-    constexpr const char* SOCKET_PATH = "/tmp/component2_socket";
+#include <spdlog/spdlog.h>
 
-    int connectWithRetry(const char* socketPath) {
-        int sockfd;
-        struct sockaddr_un addr;
+int main() {
+    std::signal(SIGPIPE, SIG_IGN);
+    sfs::initializeLogging("component2");
 
-        while (true) {
-            sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
-            if (sockfd == -1) {
-                perror("socket");
-                return -1;
-            }
+    PLCDriver plcDriver;
+    PLCOutbox outbox("component2_plc/plc_data.jsonl");
+    PLCSender sender("/tmp/component2_socket");
 
-            memset(&addr, 0, sizeof(addr));
-            addr.sun_family = AF_UNIX;
-            strncpy(addr.sun_path, socketPath, sizeof(addr.sun_path) - 1);
+    spdlog::info("Component 2 started");
 
-            // if (connect(sockfd, (struct sockaddr*)&addr, sizeof(addr)) == -1) {
-            //     perror("connect");
-            //     close(sockfd);
-            //     std::this_thread::sleep_for(std::chrono::milliseconds(retryDelayMs));
-            //     continue;
-            // }
-            if (::connect(sockfd, reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) == 0) {
-                std::cout << "[component2] connected to component3 at " << socketPath << "\n";
-                return sockfd;
-            }
- 
-            std::cout << "[component2] component3 not available yet, retrying in 1s...\n";
-            ::close(sockfd);
-            
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-
-        }
-    }
-}
-
-int main(){
-    int sockfd = connectWithRetry(SOCKET_PATH);
-    if (sockfd == -1) { 
-        std::cerr << "[component2] failed to connect to component3\n";
-        return 1;
-    }
-    int tick = 0;
     while (true) {
-        // Simulate reading from sensors and generating records
-        std::string msg = "plc_tick_" + std::to_string(tick++);
-        ssize_t sent = ::write(sockfd, msg.c_str(), msg.size());
-        if (sent < 0) {
-            std::perror("write");
-            break;
+        Record record = plcDriver.readPLCRecord();
+
+        const auto sequence = outbox.append(record);
+
+        spdlog::debug(
+            "Stored PLC record sequence={}",
+            sequence
+        );
+
+        if (!sender.connect()) {
+            spdlog::warn(
+                "Component3 unavailable; records remain queued"
+            );
+        } else {
+            const auto pendingRecords = outbox.pending();
+
+            for (const Record& pendingRecord : pendingRecords) {
+                if (!sender.send(pendingRecord)) {
+                    break;
+                }
+
+                outbox.acknowledge(pendingRecord.sequence);
+            }
         }
-        std::cout << "[component2] sent: " << msg << "\n";
+
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
- 
-    ::close(sockfd);
-    return 0;
 }

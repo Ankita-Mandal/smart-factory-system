@@ -1,6 +1,6 @@
-// simulate data vectors for sensor and plc data with random values when called by component 1 or component 2
-
+// create a record with a random data vector
 #include "common/data_generator.h"
+#include "common/record.h"
 #include <vector>
 #include <random>
 

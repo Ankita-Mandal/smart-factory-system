@@ -1,121 +1,266 @@
-#include <iostream>
-#include <cstring>
+#include "common/logger.h"
+
+#include <cerrno>
 #include <cstdio>
-#include <unistd.h>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <unordered_map>
+
+#include <poll.h>
 #include <sys/socket.h>
 #include <sys/un.h>
-#include <poll.h>
+#include <unistd.h>
+
+#include <nlohmann/json.hpp>
+#include <spdlog/spdlog.h>
 
 namespace {
-    constexpr const char* SensorSocketPath = "/tmp/component1_socket";
-    constexpr const char* PlcSocketPath = "/tmp/component2_socket";
-    constexpr std::size_t BufferSize = 1024;
+    
 
-    int createListeningSocket(const char* socketPath) {
 
-        //remove any stale socket file before creating a new one
-        ::unlink(socketPath);
+constexpr const char* SensorSocketPath = "/tmp/component1_socket";
+constexpr const char* PlcSocketPath = "/tmp/component2_socket";
 
-        int sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
-        if (sockfd == -1) {
-            perror("socket");
-            return -1;
-        }
+using Json = nlohmann::json;
 
-        struct sockaddr_un addr;
-        memset(&addr, 0, sizeof(addr));
-        addr.sun_family = AF_UNIX;
-        strncpy(addr.sun_path, socketPath, sizeof(addr.sun_path) - 1);
+struct PendingCombination {
+    Json sensorBatch;
+    Json plcRecord;
+    bool hasSensor{false};
+    bool hasPlc{false};
+};
 
-        unlink(socketPath); // Remove any existing socket file
+std::int64_t timestampBucket(std::int64_t timestampMs) {
+    return timestampMs / 1000; 
+}
 
-        if (bind(sockfd, reinterpret_cast<struct sockaddr*>(&addr), sizeof(addr)) == -1) {
-            perror("bind");
-            close(sockfd);
-            return -1;
-        }
+int createListeningSocket(const char* path) {
+    ::unlink(path);
 
-        if (listen(sockfd, 5) == -1) {
-            perror("listen");
-            close(sockfd);
-            return -1;
-        }
-
-        return sockfd;
+    const int socketFd = ::socket(AF_UNIX, SOCK_STREAM, 0);
+    if (socketFd < 0) {
+        perror("socket");
+        return -1;
     }
 
-    int acceptConnection(int listeningSockfd, const char* label) {
-        std::cout << "[component3] waiting for connection from " << label << "...\n";
-        int clientSockfd = accept(listeningSockfd, nullptr, nullptr);
-        if (clientSockfd == -1) {
-            perror("accept");
-            return -1;
+    sockaddr_un address{};
+    address.sun_family = AF_UNIX;
+    std::strncpy(
+        address.sun_path,
+        path,
+        sizeof(address.sun_path) - 1
+    );
+
+    if (::bind(
+            socketFd,
+            reinterpret_cast<sockaddr*>(&address),
+            sizeof(address)
+        ) < 0) {
+        perror("bind");
+        ::close(socketFd);
+        return -1;
+    }
+
+    if (::listen(socketFd, 1) < 0) {
+        perror("listen");
+        ::close(socketFd);
+        return -1;
+    }
+
+    return socketFd;
+}
+
+int acceptConnection(int listeningFd) {
+    return ::accept(listeningFd, nullptr, nullptr);
+}
+
+bool sendAcknowledgement(int clientFd, std::uint64_t sequence) {
+    const std::string acknowledgement =
+        Json{{"ack", sequence}}.dump() + '\n';
+
+    return ::write(
+        clientFd,
+        acknowledgement.data(),
+        acknowledgement.size()
+    ) == static_cast<ssize_t>(acknowledgement.size());
+}
+
+void combineIfReady( std::unordered_map<std::int64_t, PendingCombination>& pending, std::int64_t bucket, std::ofstream& output) 
+{
+    auto iterator = pending.find(bucket);
+
+    if (iterator == pending.end()) {
+        spdlog::warn(
+            "Data missing at time:",
+            bucket
+        );
+        return;
+
+    }
+
+    PendingCombination& combination = iterator->second;
+
+    if (!combination.hasSensor || !combination.hasPlc) {
+        return;
+    }
+
+    Json combined{
+        {"timestamp_bucket", bucket},
+        {"sensors", combination.sensorBatch.at("sensors")},
+        {"plc", combination.plcRecord}
+    };
+
+    output << combined.dump() << '\n';
+    output.flush();
+
+    pending.erase(iterator);
+    spdlog::info(
+        "[component3] wrote combined record for bucket ",
+        bucket
+    );
+}
+
+void processLine(
+    const std::string& line,
+    bool fromSensor,
+    int clientFd,
+    std::unordered_map<std::int64_t, PendingCombination>& pending,
+    std::ofstream& output
+) {
+    if (line.empty()) {
+        return;
+    }
+
+    try {
+        const Json message = Json::parse(line);
+        const auto timestampMs =
+            message.at("timestamp_ms").get<std::int64_t>();
+        const auto sequence =
+            message.at("sequence").get<std::uint64_t>();
+
+        const auto bucket = timestampBucket(timestampMs);
+        auto& combination = pending[bucket];
+
+        if (fromSensor) {
+            combination.sensorBatch = message;
+            combination.hasSensor = true;
+        } else {
+            combination.plcRecord = message;
+            combination.hasPlc = true;
         }
-        std::cout << "[component3] connected to " << label << "\n";
-        return clientSockfd;
+
+        if (!sendAcknowledgement(clientFd, sequence)) {
+            spdlog::warn(
+                "[component3] failed to send acknowledgement\n"
+            );
+        }
+
+        combineIfReady(pending, bucket, output);
+    } catch (const std::exception& error) {
+        spdlog::warn(
+            "[component3] invalid JSON: ",
+            error.what()
+        );
     }
 }
 
+}
+
 int main() {
-    int sensorListeningSockfd = createListeningSocket(SensorSocketPath);
-    if (sensorListeningSockfd == -1) {
-        std::cerr << "[component3] failed to create listening socket for component1\n";
+    sfs::initializeLogging("component3");
+    const int sensorListeningFd =
+        createListeningSocket(SensorSocketPath);
+    const int plcListeningFd =
+        createListeningSocket(PlcSocketPath);
+    if (sensorListeningFd < 0 || plcListeningFd < 0) {
+        return 1;
+    }
+    spdlog::info(
+        "[component3] waiting for component connections\n"
+    );
+
+    const int sensorClientFd = acceptConnection(sensorListeningFd);
+    const int plcClientFd = acceptConnection(plcListeningFd);
+
+    if (sensorClientFd < 0 || plcClientFd < 0) {
         return 1;
     }
 
-    int plcListeningSockfd = createListeningSocket(PlcSocketPath);
-    if (plcListeningSockfd == -1) {
-        std::cerr << "[component3] failed to create listening socket for component2\n";
-        return 1;
+    std::ofstream output("component3_combine/combination.jsonl", std::ios::app);
+
+    if (!output) {
+        spdlog::warn(
+            "[component3] could not open combination.jsonl\n"
+        );
     }
 
-    int sensorClientSockfd = acceptConnection(sensorListeningSockfd, "component1");
-    if (sensorClientSockfd == -1) {
-        return 1;
-    }
+    std::unordered_map<std::int64_t, PendingCombination> pending;
+    std::string sensorBuffer;
+    std::string plcBuffer;
 
-    int plcClientSockfd = acceptConnection(plcListeningSockfd, "component2");
-    if (plcClientSockfd == -1) {
-        return 1;
-    }
+    pollfd sockets[2]{
+        {sensorClientFd, POLLIN, 0},
+        {plcClientFd, POLLIN, 0}
+    };
 
-    pollfd fds[2];
-    fds[0].fd = sensorClientSockfd;
-    fds[0].events = POLLIN;
-    fds[1].fd = plcClientSockfd;
-    fds[1].events = POLLIN;
-    char buffer[BufferSize];
+    char buffer[4096];
 
-    std::cout << "[component3] ready to receive data from component1 and component2\n";
-    while(true){
-        int ready = poll(fds, 2, -1); // Wait indefinitely for events
-        if (ready == -1) {
+    while (true) {
+        const int result = ::poll(sockets, 2, -1);
+
+        if (result < 0) {
+            if (errno == EINTR) {
+                continue;
+            }
+
             perror("poll");
             break;
         }
 
-        for (auto& pfd : fds) {
-            if (pfd.fd < 0 || !(pfd.revents & POLLIN)) {
+        for (int index = 0; index < 2; ++index) {
+            if (!(sockets[index].revents & POLLIN)) {
                 continue;
             }
- 
-            ssize_t n = ::read(pfd.fd, buffer, sizeof(buffer) - 1);
-            const char* label = (pfd.fd == sensorClientSockfd) ? "sensor" : "plc";
- 
-            if (n > 0) {
-                buffer[n] = '\0';
-                std::cout << "[component3] received from " << label << ": " << buffer << "\n";
-            } else if (n == 0) {
-                std::cout << "[component3] " << label << " disconnected\n";
-                pfd.fd = -1;  // stop polling this one
-            } else {
-                std::perror("read");
+
+            const ssize_t bytesRead =
+                ::read(sockets[index].fd, buffer, sizeof(buffer));
+
+            if (bytesRead <= 0) {
+                sockets[index].fd = -1;
+                continue;
+            }
+
+            std::string& messageBuffer =
+                index == 0 ? sensorBuffer : plcBuffer;
+
+            messageBuffer.append(buffer, bytesRead);
+
+            std::size_t newlinePosition;
+
+            while ((newlinePosition =
+                        messageBuffer.find('\n')) != std::string::npos) {
+                const std::string line =
+                    messageBuffer.substr(0, newlinePosition);
+
+                messageBuffer.erase(0, newlinePosition + 1);
+
+                processLine(
+                    line,
+                    index == 0,
+                    sockets[index].fd,
+                    pending,
+                    output
+                );
             }
         }
     }
-    ::close(sensorClientSockfd);
-    ::close(plcClientSockfd);
-    ::close(sensorListeningSockfd);
-    ::close(plcListeningSockfd);
+
+    ::close(sensorClientFd);
+    ::close(plcClientFd);
+    ::close(sensorListeningFd);
+    ::close(plcListeningFd);
+
     return 0;
 }

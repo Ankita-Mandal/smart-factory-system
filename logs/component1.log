@@ -1,0 +1,141 @@
+2026-09-21 20:39:42.757 [info] [component1] Component 1 started with 3 sensors
+2026-09-21 20:39:42.758 [debug] [component1] Stored sensor batch sequence=67 sensor_count=3
+2026-09-21 20:39:42.759 [info] [component1] Sensor sender connected to /tmp/component1_socket
+2026-09-21 20:39:42.759 [debug] [component1] Sent sensor batch sequence=66 sensor_count=3
+2026-09-21 20:39:42.759 [debug] [component1] Acknowledged sensor batch sequence=66
+2026-09-21 20:39:42.759 [debug] [component1] Sent sensor batch sequence=67 sensor_count=3
+2026-09-21 20:39:42.760 [debug] [component1] Acknowledged sensor batch sequence=67
+2026-09-21 20:39:43.758 [debug] [component1] Stored sensor batch sequence=68 sensor_count=3
+2026-09-21 20:39:43.759 [debug] [component1] Sent sensor batch sequence=68 sensor_count=3
+2026-09-21 20:39:43.759 [debug] [component1] Acknowledged sensor batch sequence=68
+2026-09-21 20:39:44.763 [debug] [component1] Stored sensor batch sequence=69 sensor_count=3
+2026-09-21 20:39:44.764 [debug] [component1] Sent sensor batch sequence=69 sensor_count=3
+2026-09-21 20:39:44.765 [debug] [component1] Acknowledged sensor batch sequence=69
+2026-09-21 20:39:45.768 [debug] [component1] Stored sensor batch sequence=70 sensor_count=3
+2026-09-21 20:39:45.769 [debug] [component1] Sent sensor batch sequence=70 sensor_count=3
+2026-09-21 20:39:45.770 [debug] [component1] Acknowledged sensor batch sequence=70
+2026-09-21 20:39:46.773 [debug] [component1] Stored sensor batch sequence=71 sensor_count=3
+2026-09-21 20:39:46.775 [debug] [component1] Sent sensor batch sequence=71 sensor_count=3
+2026-09-21 20:39:46.776 [debug] [component1] Acknowledged sensor batch sequence=71
+2026-09-21 20:39:47.776 [debug] [component1] Stored sensor batch sequence=72 sensor_count=3
+2026-09-21 20:39:47.777 [debug] [component1] Sent sensor batch sequence=72 sensor_count=3
+2026-09-21 20:39:47.777 [debug] [component1] Acknowledged sensor batch sequence=72
+2026-09-21 20:39:48.781 [debug] [component1] Stored sensor batch sequence=73 sensor_count=3
+2026-09-21 20:39:48.783 [debug] [component1] Sent sensor batch sequence=73 sensor_count=3
+2026-09-21 20:39:48.784 [debug] [component1] Acknowledged sensor batch sequence=73
+2026-09-21 20:39:49.786 [debug] [component1] Stored sensor batch sequence=74 sensor_count=3
+2026-09-21 20:39:49.787 [debug] [component1] Sent sensor batch sequence=74 sensor_count=3
+2026-09-21 20:39:49.788 [debug] [component1] Acknowledged sensor batch sequence=74
+2026-09-21 20:39:50.787 [debug] [component1] Stored sensor batch sequence=75 sensor_count=3
+2026-09-21 20:39:50.788 [debug] [component1] Sent sensor batch sequence=75 sensor_count=3
+2026-09-21 20:39:50.788 [debug] [component1] Acknowledged sensor batch sequence=75
+2026-09-21 20:39:51.792 [debug] [component1] Stored sensor batch sequence=76 sensor_count=3
+2026-09-21 20:39:51.793 [debug] [component1] Sent sensor batch sequence=76 sensor_count=3
+2026-09-21 20:39:51.794 [debug] [component1] Acknowledged sensor batch sequence=76
+2026-09-21 20:39:52.795 [debug] [component1] Stored sensor batch sequence=77 sensor_count=3
+2026-09-21 20:39:52.796 [debug] [component1] Sent sensor batch sequence=77 sensor_count=3
+2026-09-21 20:39:52.796 [debug] [component1] Acknowledged sensor batch sequence=77
+2026-09-21 20:39:53.796 [debug] [component1] Stored sensor batch sequence=78 sensor_count=3
+2026-09-21 20:39:53.797 [debug] [component1] Sent sensor batch sequence=78 sensor_count=3
+2026-09-21 20:39:53.797 [debug] [component1] Acknowledged sensor batch sequence=78
+2026-09-21 20:39:54.797 [debug] [component1] Stored sensor batch sequence=79 sensor_count=3
+2026-09-21 20:39:54.800 [debug] [component1] Sent sensor batch sequence=79 sensor_count=3
+2026-09-21 20:39:54.801 [debug] [component1] Acknowledged sensor batch sequence=79
+2026-09-21 20:39:55.802 [debug] [component1] Stored sensor batch sequence=80 sensor_count=3
+2026-09-21 20:39:55.803 [error] [component1] Could not write sensor batch: Broken pipe
+2026-09-21 20:39:55.803 [warning] [component1] Failed to send sensor batch sequence=80
+2026-09-21 20:39:55.803 [info] [component1] Sensor sender disconnected
+2026-09-21 20:39:55.803 [debug] [component1] Component 3 unavailable; pending batches remain queued
+2026-09-21 20:39:56.807 [debug] [component1] Stored sensor batch sequence=81 sensor_count=3
+2026-09-21 20:39:56.808 [debug] [component1] Component 3 is unavailable: Connection refused
+2026-09-21 20:39:56.808 [info] [component1] Sensor sender disconnected
+2026-09-21 20:39:56.808 [debug] [component1] Component 3 unavailable; pending batches remain queued
+2026-09-21 20:39:57.812 [debug] [component1] Stored sensor batch sequence=82 sensor_count=3
+2026-09-21 20:39:57.813 [debug] [component1] Component 3 is unavailable: Connection refused
+2026-09-21 20:39:57.813 [info] [component1] Sensor sender disconnected
+2026-09-21 20:39:57.813 [debug] [component1] Component 3 unavailable; pending batches remain queued
+2026-09-21 20:39:58.817 [debug] [component1] Stored sensor batch sequence=83 sensor_count=3
+2026-09-21 20:39:58.819 [debug] [component1] Component 3 is unavailable: Connection refused
+2026-09-21 20:39:58.819 [info] [component1] Sensor sender disconnected
+2026-09-21 20:39:58.819 [debug] [component1] Component 3 unavailable; pending batches remain queued
+2026-09-21 20:39:59.822 [debug] [component1] Stored sensor batch sequence=84 sensor_count=3
+2026-09-21 20:39:59.824 [debug] [component1] Component 3 is unavailable: Connection refused
+2026-09-21 20:39:59.824 [info] [component1] Sensor sender disconnected
+2026-09-21 20:39:59.824 [debug] [component1] Component 3 unavailable; pending batches remain queued
+2026-09-21 20:40:00.827 [debug] [component1] Stored sensor batch sequence=85 sensor_count=3
+2026-09-21 20:40:00.828 [debug] [component1] Component 3 is unavailable: Connection refused
+2026-09-21 20:40:00.828 [info] [component1] Sensor sender disconnected
+2026-09-21 20:40:00.828 [debug] [component1] Component 3 unavailable; pending batches remain queued
+2026-09-21 20:40:01.832 [debug] [component1] Stored sensor batch sequence=86 sensor_count=3
+2026-09-21 20:40:01.833 [debug] [component1] Component 3 is unavailable: Connection refused
+2026-09-21 20:40:01.833 [info] [component1] Sensor sender disconnected
+2026-09-21 20:40:01.833 [debug] [component1] Component 3 unavailable; pending batches remain queued
+2026-09-21 20:40:02.837 [debug] [component1] Stored sensor batch sequence=87 sensor_count=3
+2026-09-21 20:40:02.838 [debug] [component1] Component 3 is unavailable: Connection refused
+2026-09-21 20:40:02.838 [info] [component1] Sensor sender disconnected
+2026-09-21 20:40:02.838 [debug] [component1] Component 3 unavailable; pending batches remain queued
+2026-09-21 20:40:03.840 [debug] [component1] Stored sensor batch sequence=88 sensor_count=3
+2026-09-21 20:40:03.843 [info] [component1] Sensor sender connected to /tmp/component1_socket
+2026-09-21 20:40:03.843 [debug] [component1] Sent sensor batch sequence=80 sensor_count=3
+2026-09-21 20:40:03.844 [debug] [component1] Acknowledged sensor batch sequence=80
+2026-09-21 20:40:03.844 [debug] [component1] Sent sensor batch sequence=81 sensor_count=3
+2026-09-21 20:40:03.845 [debug] [component1] Acknowledged sensor batch sequence=81
+2026-09-21 20:40:03.845 [debug] [component1] Sent sensor batch sequence=82 sensor_count=3
+2026-09-21 20:40:03.847 [debug] [component1] Acknowledged sensor batch sequence=82
+2026-09-21 20:40:03.847 [debug] [component1] Sent sensor batch sequence=83 sensor_count=3
+2026-09-21 20:40:03.848 [debug] [component1] Acknowledged sensor batch sequence=83
+2026-09-21 20:40:03.849 [debug] [component1] Sent sensor batch sequence=84 sensor_count=3
+2026-09-21 20:40:03.849 [debug] [component1] Acknowledged sensor batch sequence=84
+2026-09-21 20:40:03.849 [debug] [component1] Sent sensor batch sequence=85 sensor_count=3
+2026-09-21 20:40:03.850 [debug] [component1] Acknowledged sensor batch sequence=85
+2026-09-21 20:40:03.850 [debug] [component1] Sent sensor batch sequence=86 sensor_count=3
+2026-09-21 20:40:03.850 [debug] [component1] Acknowledged sensor batch sequence=86
+2026-09-21 20:40:03.850 [debug] [component1] Sent sensor batch sequence=87 sensor_count=3
+2026-09-21 20:40:03.850 [debug] [component1] Acknowledged sensor batch sequence=87
+2026-09-21 20:40:03.850 [debug] [component1] Sent sensor batch sequence=88 sensor_count=3
+2026-09-21 20:40:03.851 [debug] [component1] Acknowledged sensor batch sequence=88
+2026-09-21 20:40:04.845 [debug] [component1] Stored sensor batch sequence=89 sensor_count=3
+2026-09-21 20:40:04.846 [debug] [component1] Sent sensor batch sequence=89 sensor_count=3
+2026-09-21 20:40:04.847 [debug] [component1] Acknowledged sensor batch sequence=89
+2026-09-21 20:40:05.850 [debug] [component1] Stored sensor batch sequence=90 sensor_count=3
+2026-09-21 20:40:05.852 [debug] [component1] Sent sensor batch sequence=90 sensor_count=3
+2026-09-21 20:40:05.852 [debug] [component1] Acknowledged sensor batch sequence=90
+2026-09-21 20:40:06.854 [debug] [component1] Stored sensor batch sequence=91 sensor_count=3
+2026-09-21 20:40:06.856 [debug] [component1] Sent sensor batch sequence=91 sensor_count=3
+2026-09-21 20:40:06.857 [debug] [component1] Acknowledged sensor batch sequence=91
+2026-09-21 20:40:07.859 [debug] [component1] Stored sensor batch sequence=92 sensor_count=3
+2026-09-21 20:40:07.860 [debug] [component1] Sent sensor batch sequence=92 sensor_count=3
+2026-09-21 20:40:07.861 [debug] [component1] Acknowledged sensor batch sequence=92
+2026-09-21 20:40:08.861 [debug] [component1] Stored sensor batch sequence=93 sensor_count=3
+2026-09-21 20:40:08.862 [debug] [component1] Sent sensor batch sequence=93 sensor_count=3
+2026-09-21 20:40:08.862 [debug] [component1] Acknowledged sensor batch sequence=93
+2026-09-21 20:40:09.866 [debug] [component1] Stored sensor batch sequence=94 sensor_count=3
+2026-09-21 20:40:09.867 [debug] [component1] Sent sensor batch sequence=94 sensor_count=3
+2026-09-21 20:40:09.868 [debug] [component1] Acknowledged sensor batch sequence=94
+2026-09-21 20:40:10.869 [debug] [component1] Stored sensor batch sequence=95 sensor_count=3
+2026-09-21 20:40:10.872 [debug] [component1] Sent sensor batch sequence=95 sensor_count=3
+2026-09-21 20:40:10.872 [debug] [component1] Acknowledged sensor batch sequence=95
+2026-09-21 20:40:11.873 [debug] [component1] Stored sensor batch sequence=96 sensor_count=3
+2026-09-21 20:40:11.875 [debug] [component1] Sent sensor batch sequence=96 sensor_count=3
+2026-09-21 20:40:11.875 [debug] [component1] Acknowledged sensor batch sequence=96
+2026-09-21 20:40:12.878 [debug] [component1] Stored sensor batch sequence=97 sensor_count=3
+2026-09-21 20:40:12.880 [debug] [component1] Sent sensor batch sequence=97 sensor_count=3
+2026-09-21 20:40:12.880 [debug] [component1] Acknowledged sensor batch sequence=97
+2026-09-21 20:40:13.882 [debug] [component1] Stored sensor batch sequence=98 sensor_count=3
+2026-09-21 20:40:13.883 [debug] [component1] Sent sensor batch sequence=98 sensor_count=3
+2026-09-21 20:40:13.884 [debug] [component1] Acknowledged sensor batch sequence=98
+2026-09-21 20:40:14.884 [debug] [component1] Stored sensor batch sequence=99 sensor_count=3
+2026-09-21 20:40:14.885 [debug] [component1] Sent sensor batch sequence=99 sensor_count=3
+2026-09-21 20:40:14.886 [debug] [component1] Acknowledged sensor batch sequence=99
+2026-09-21 20:40:15.888 [debug] [component1] Stored sensor batch sequence=100 sensor_count=3
+2026-09-21 20:40:15.890 [debug] [component1] Sent sensor batch sequence=100 sensor_count=3
+2026-09-21 20:40:15.890 [debug] [component1] Acknowledged sensor batch sequence=100
+2026-09-21 20:40:16.894 [debug] [component1] Stored sensor batch sequence=101 sensor_count=3
+2026-09-21 20:40:16.896 [debug] [component1] Sent sensor batch sequence=101 sensor_count=3
+2026-09-21 20:40:16.896 [debug] [component1] Acknowledged sensor batch sequence=101
+2026-09-21 20:40:17.899 [debug] [component1] Stored sensor batch sequence=102 sensor_count=3
+2026-09-21 20:40:17.901 [debug] [component1] Sent sensor batch sequence=102 sensor_count=3
+2026-09-21 20:40:17.901 [debug] [component1] Acknowledged sensor batch sequence=102
+2026-09-21 20:40:18.903 [debug] [component1] Stored sensor batch sequence=103 sensor_count=3
+2026-09-21 20:40:18.907 [error] [component1] Could not write sensor batch: Broken pipe
+2026-09-21 20:40:18.907 [warning] [component1] Failed to send sensor batch sequence=103
